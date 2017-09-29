@@ -1,6 +1,6 @@
 <template>
     <ul style="text-align: left">
-    	<lv-item-nota v-for="nota in notas" :nota="nota">
+    	<lv-item-nota v-for="(nota, ch) in notas" :key="ch" :nota="nota">
     	</lv-item-nota>
 	</ul>
 </template>
@@ -12,13 +12,15 @@ export default{
 	name: 'lv-lista-nota',
 	components: {LvItemNota},
 	data() { return { notas: {} } },
-	mounted() { this.atualizar() },
-	updated() { this.atualizar() },
+	mounted() {
+		this.$bus.$on('atualizacao', this.atualizar)
+		this.atualizar()
+	},
 	methods: {
 		atualizar() {
 			Nota.listar( this.campos ).then(resposta => {
-				if(resposta.data.success)
-					this.notas = resposta.data.notes
+				if(resposta.data.sucesso)
+					this.notas = resposta.data.notas
 			}).catch( e => {} )
 		}
 	},

@@ -1,11 +1,11 @@
 import {http} from './configuracao'
 
 export default {
-	registrar: ({ name, email, password }) => {
-		return http.post('users', { name, email, password });
+	registrar: ({ nome, email, senha }) => {
+		return http.post('usuario', { nome, email, senha });
 	},
 
-	logar: ({ email, password }) => {
-		return http.post('users/verify', {email, password});
+	logar: ({ email, senha }) => {
+		return http.post('usuario/login', {email, senha});
 	},
 }

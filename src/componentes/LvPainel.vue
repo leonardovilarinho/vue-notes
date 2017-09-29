@@ -1,6 +1,6 @@
 <template>
     <div>
-        Painel logado com {{ $store.state.usuario.nome }}
+        <span>Painel logado com {{ $store.state.usuario.nome }}</span>
         <button @click="sair">Sair</button>
         <hr>
         <lv-nova-nota></lv-nova-nota>

@@ -1,7 +1,7 @@
 <template>
 	<li>
 		<button @click="apagar()">Apagar</button>
-		{{ nota.content }}
+		<span>{{ nota.conteudo }}</span>
 	</li>
 </template>
 
@@ -14,8 +14,8 @@ export default{
 		apagar() {
 			if(confirm('Deseja realmente apagar a anotação?'))
 				Nota.apagar( this.nota.id )
-					.then(r => {})
-				.catch( e => {} )
+					.then(r => { this.$bus.$emit('atualizacao') })
+				.catch(e => { alert('Erro ao apagar') })
 		}
 	}
 }

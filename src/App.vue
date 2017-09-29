@@ -10,5 +10,5 @@ export default {
 }
 </script>
 <style type="text/css">
-    body, html { text-align: center }
+    body , html, * { text-align: center }
 </style>

@@ -2,9 +2,19 @@
     <div>
         <h2>Registre-se no sistema</h2>
         <hr>
-        <lv-input ref="nome" titulo="Nome"></lv-input>
-        <lv-input ref="email" titulo="Email"></lv-input>
-        <lv-input ref="senha" titulo="Senha" tipo="senha"></lv-input>
+
+        <lv-input titulo="Nome">
+        	<input type="text" v-model="usuario.nome">
+        </lv-input>
+
+        <lv-input titulo="Email">
+        	<input type="email" v-model="usuario.email">
+        </lv-input>
+
+        <lv-input titulo="Senha">
+        	<input type="password" v-model="usuario.senha">
+        </lv-input>
+
         <br>
         <input @click='registrar' type="submit" :value="estado" :disabled="estado != 'Registrar'">
     </div>
@@ -14,27 +24,18 @@
 import Usuario from './../servicos/usuario'
 export default{
 	name: 'lv-registro',
-	data() { return { estado: 'Registrar' } },
+	data() { return { estado: 'Registrar', usuario : {nome: '', email: '', senha: ''} } },
 	methods: {
 		registrar() {
 			this.estado = 'Carregando...'
-			Usuario.registrar( this.campos ).then(resposta => {
-				if(resposta.data.success) {
+			Usuario.registrar( this.usuario ).then(resposta => {
+				if(resposta.data.sucesso) {
 					alert('Registrado com sucesso')
 					this.$router.replace('/')
 				}
 				else
 					this.estado = 'Registrar'
-			}).catch( e => this.estado = 'Registrar' )
-		},
-	},
-	computed: {
-		campos() {
-			return {
-				name: this.$refs['nome'].valor,
-				email: this.$refs['email'].valor,
-				password: this.$refs['senha'].valor
-			}
+			}).catch( e => console.log(e) )
 		},
 	}
 }

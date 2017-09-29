@@ -1,13 +1,13 @@
 import {http} from './configuracao'
 
 export default {
-	criar: ({ content, user_id }) => {
-		return http.post('notes', { content, user_id });
+	criar: ({ conteudo, usuario_id }) => {
+		return http.post('notas', { conteudo, usuario_id });
 	},
-	listar: (user_id) => {
-		return http.get('notes?user_id=' + user_id);
+	listar: (usuario_id) => {
+		return http.get('notas?usuario_id=' + usuario_id);
 	},
-	apagar: (note_id) => {
-		return http.delete('notes/' + note_id);
+	apagar: (nota_id) => {
+		return http.post('notas/' + nota_id);
 	}
 }
